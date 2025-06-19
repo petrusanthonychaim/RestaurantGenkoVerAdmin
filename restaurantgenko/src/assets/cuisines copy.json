@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "name": "Sushi Moriawase",
+    "description": "An assortment of fresh, vinegared rice topped with various ingredients, mainly raw fish and seafood.",
+    "price": 95000,
+    "imgURL": "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg",
+    "categoryId": 1,
+    "authorId": 1
+  },
+  {
+    "id": 2,
+    "name": "Tonkotsu Ramen",
+    "description": "Rich and savory noodle soup with a pork bone broth, topped with chashu pork, menma, and a soft-boiled egg.",
+    "price": 88000,
+    "imgURL": "https://images.pexels.com/photos/16068586/pexels-photo-16068586.jpeg",
+    "categoryId": 2,
+    "authorId": 2
+  },
+  {
+    "id": 3,
+    "name": "Ebi Tempura",
+    "description": "Lightly battered and deep-fried prawns, served with a tentsuyu dipping sauce.",
+    "price": 75000,
+    "imgURL": "https://images.pexels.com/photos/15985541/pexels-photo-15985541.jpeg",
+    "categoryId": 3,
+    "authorId": 3
+  },
+  {
+    "id": 4,
+    "name": "Chicken Karaage",
+    "description": "Juicy, bite-sized pieces of marinated chicken, fried to a perfect crisp.",
+    "price": 72000,
+    "imgURL": "https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg",
+    "categoryId": 4,
+    "authorId": 4
+  },
+  {
+    "id": 5,
+    "name": "Okonomiyaki",
+    "description": "A savory Japanese pancake containing a variety of ingredients, topped with sauces and bonito flakes.",
+    "price": 81000,
+    "imgURL": "https://images.pexels.com/photos/32603015/pexels-photo-32603015.jpeg",
+    "categoryId": 5,
+    "authorId": 1
+  },
+  {
+    "id": 6,
+    "name": "Tofu Miso Soup",
+    "description": "A traditional Japanese soup made with dashi stock, miso paste, tofu, and wakame seaweed.",
+    "price": 70000,
+    "imgURL": "https://images.pexels.com/photos/30682816/pexels-photo-30682816.jpeg",
+    "categoryId": 1,
+    "authorId": 2
+  },
+  {
+    "id": 7,
+    "name": "Yakitori Platter",
+    "description": "Skewered and grilled chicken, seasoned with either a sweet soy-based tare sauce or salt.",
+    "price": 92000,
+    "imgURL": "https://images.pexels.com/photos/30682937/pexels-photo-30682937.jpeg",
+    "categoryId": 2,
+    "authorId": 3
+  },
+  {
+    "id": 8,
+    "name": "Salmon Onigiri",
+    "description": "A classic Japanese rice ball filled with grilled salmon and wrapped in nori seaweed.",
+    "price": 71000,
+    "imgURL": "https://images.pexels.com/photos/31302286/pexels-photo-31302286.jpeg",
+    "categoryId": 3,
+    "authorId": 4
+  },
+  {
+    "id": 9,
+    "name": "Kitsune Udon",
+    "description": "Thick wheat flour noodles in a savory hot broth, topped with seasoned fried tofu.",
+    "price": 84000,
+    "imgURL": "https://images.pexels.com/photos/5339078/pexels-photo-5339078.jpeg",
+    "categoryId": 4,
+    "authorId": 1
+  },
+  {
+    "id": 10,
+    "name": "Zaru Soba",
+    "description": "Chilled buckwheat noodles served with a soy-based tsuyu dipping sauce, nori, and wasabi.",
+    "price": 86000,
+    "imgURL": "https://images.pexels.com/photos/4518697/pexels-photo-4518697.jpeg",
+    "categoryId": 5,
+    "authorId": 2
+  },
+  {
+    "id": 11,
+    "name": "Tonkatsu Set",
+    "description": "A breaded, deep-fried pork cutlet served with rice, miso soup, and shredded cabbage.",
+    "price": 98000,
+    "imgURL": "https://images.pexels.com/photos/2095493/pexels-photo-2095493.jpeg",
+    "categoryId": 1,
+    "authorId": 3
+  },
+  {
+    "id": 12,
+    "name": "Gyoza",
+    "description": "Pan-fried dumplings filled with ground meat and vegetables, served with a dipping sauce.",
+    "price": 73000,
+    "imgURL": "https://images.pexels.com/photos/5409015/pexels-photo-5409015.jpeg",
+    "categoryId": 2,
+    "authorId": 4
+  },
+  {
+    "id": 13,
+    "name": "Katsudon",
+    "description": "A comforting bowl of rice topped with a deep-fried pork cutlet, egg, and condiments.",
+    "price": 91000,
+    "imgURL": "https://images.pexels.com/photos/9550937/pexels-photo-9550937.jpeg",
+    "categoryId": 3,
+    "authorId": 1
+  },
+  {
+    "id": 14,
+    "name": "Takoyaki",
+    "description": "Ball-shaped Japanese snack made of a wheat flour-based batter and filled with diced octopus.",
+    "price": 78000,
+    "imgURL": "https://images.pexels.com/photos/5638268/pexels-photo-5638268.jpeg",
+    "categoryId": 4,
+    "authorId": 2
+  },
+  {
+    "id": 15,
+    "name": "Sashimi Platter",
+    "description": "A selection of expertly sliced, fresh raw fish and seafood, served with daikon, wasabi, and soy sauce.",
+    "price": 99000,
+    "imgURL": "https://images.pexels.com/photos/8133575/pexels-photo-8133575.jpeg",
+    "categoryId": 5,
+    "authorId": 3
+  },
+  {
+    "id": 16,
+    "name": "Beef Sukiyaki",
+    "description": "Thinly sliced beef simmered in a sweet and savory soy sauce broth with vegetables and tofu in a hot pot.",
+    "price": 97000,
+    "imgURL": "https://images.pexels.com/photos/7732230/pexels-photo-7732230.jpeg",
+    "categoryId": 1,
+    "authorId": 4
+  },
+  {
+    "id": 17,
+    "name": "Pork Shabu-Shabu",
+    "description": "A hot pot dish of thinly sliced pork and vegetables boiled in water and served with dipping sauces.",
+    "price": 96000,
+    "imgURL": "https://images.pexels.com/photos/7732231/pexels-photo-7732231.jpeg",
+    "categoryId": 2,
+    "authorId": 1
+  },
+  {
+    "id": 18,
+    "name": "Edamame",
+    "description": "Young soybeans steamed in their pods and lightly salted. A perfect, healthy appetizer.",
+    "price": 70000,
+    "imgURL": "https://images.pexels.com/photos/4397732/pexels-photo-4397732.jpeg",
+    "categoryId": 3,
+    "authorId": 2
+  },
+  {
+    "id": 19,
+    "name": "Chawanmushi",
+    "description": "A savory and delicate Japanese steamed egg custard, filled with ingredients like chicken and mushrooms.",
+    "price": 76000,
+    "imgURL": "https://images.pexels.com/photos/13014131/pexels-photo-13014131.jpeg",
+    "categoryId": 4,
+    "authorId": 3
+  },
+  {
+    "id": 20,
+    "name": "Matcha Mochi",
+    "description": "Soft and chewy rice cake filled with a sweet red bean paste and flavored with green tea.",
+    "price": 74000,
+    "imgURL": "https://images.pexels.com/photos/5741291/pexels-photo-5741291.jpeg",
+    "categoryId": 5,
+    "authorId": 4
+  },
+  {
+    "id": 21,
+    "name": "Chicken Teriyaki Don",
+    "description": "A rice bowl (donburi) topped with grilled chicken glazed in a sweet and savory teriyaki sauce.",
+    "price": 89000,
+    "imgURL": "https://images.pexels.com/photos/1435193/pexels-photo-1435193.jpeg",
+    "categoryId": 1,
+    "authorId": 1
+  },
+  {
+    "id": 22,
+    "name": "Unagi Kabayaki",
+    "description": "Grilled freshwater eel glazed with a sweetened soy-based kabayaki sauce.",
+    "price": 99500,
+    "imgURL": "https://images.pexels.com/photos/9550935/pexels-photo-9550935.jpeg",
+    "categoryId": 2,
+    "authorId": 2
+  },
+  {
+    "id": 23,
+    "name": "Nikujaga",
+    "description": "A classic Japanese home-cooked dish of stewed meat (niku) and potatoes (jagaimo).",
+    "price": 83000,
+    "imgURL": "https://images.pexels.com/photos/6210459/pexels-photo-6210459.jpeg",
+    "categoryId": 3,
+    "authorId": 3
+  },
+  {
+    "id": 24,
+    "name": "Yakisoba",
+    "description": "Japanese stir-fried noodles with pork and vegetables, seasoned with a sweet and savory sauce.",
+    "price": 85000,
+    "imgURL": "https://images.pexels.com/photos/10184913/pexels-photo-10184913.jpeg",
+    "categoryId": 4,
+    "authorId": 4
+  },
+  {
+    "id": 25,
+    "name": "Matcha Roll Cake",
+    "description": "A light and fluffy sponge cake rolled with a creamy matcha-flavored filling.",
+    "price": 79000,
+    "imgURL": "https://images.pexels.com/photos/8246340/pexels-photo-8246340.jpeg",
+    "categoryId": 5,
+    "authorId": 1
+  }
+]
