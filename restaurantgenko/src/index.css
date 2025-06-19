@@ -1,1 +1,9 @@
+@font-face{
+  font-family: Chango;
+  src: url("../src/assets/fonts/Chango-Regular.ttf");
+}
 @import "tailwindcss";
+
+@theme{
+  --font-chango: Chango, "sans-serif"
+}

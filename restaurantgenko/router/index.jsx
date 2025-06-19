@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect } from "react-router";
 import HomePage from "../src/pages/homepage";
 import RootLayout from "../layouts/RootLayout";
 import TableContent from "../src/components/TableContent";
+import AllCuisines from "../src/pages/AllCuisines";
 
 
 export const router = createBrowserRouter([
@@ -12,8 +13,14 @@ export const router = createBrowserRouter([
       {
         //child in the table content, how to access parent
         path: "/",
-        element: <TableContent/>,
+        element: <AllCuisines />,
       },
+      {
+        //child in the table content, how to access parent
+        path: "/",
+        element: <AllCuisines />,
+      },
+      
     ],
   },
 
