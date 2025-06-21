@@ -1,27 +1,37 @@
 import { Link } from "react-router";
 
-const TableImages = ({cuisine}) => {
+const TableImages = ({ cuisine }) => {
   return (
     <>
-      <div className="relative overflow-hidden rounded-lg shadow-lg 
-             transition-transform duration-300 ease-in-out 
-             hover:scale-105 hover:-translate-y-2">
-            {/*  */}
-            <Link to={`/cuisine/show/${cuisine.id}`}>
-            <img 
-            src={cuisine.imgURL} 
-            alt={cuisine.name} 
-            className="w-full h-40 object-cover" />
+      <div className="bg-white rounded-lg shadow-xl overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out">
+        <img
+          className="w-full h-48 object-cover"
+          src={cuisine.imgURL}
+          alt={`A plate of ${cuisine.name}`}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://placehold.co/600x400/FFF/333?text=Image+Not+Found";
+          }}
+        />
 
-            <div className="absolute bottom-0 left-0 right-0 bg-amber-600">
-              <p className="text-sm text-white text-center font-semibold">{cuisine.name}</p>
-            </div>
-            </Link>
-
-            {/*  */}
+        <div className="p-5">
+          <h3 className="text-2xl font-bold text-amber-500 mb-2">
+            {cuisine.name}
+          </h3>
+          <p className="text-gray-700 text-base">{cuisine.description}</p>
+          <div>
+            <p className="text-xl font-semibold text-gray-800">
+              {cuisine.price.toLocaleString("id-ID", {
+                style: "currency",
+                currency: "IDR",
+              })}
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default TableImages
+export default TableImages;
