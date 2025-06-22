@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import TableImages from "../components/TableImages";
 import loadingGif from "../assets/images/loading.svg";
 import { baseUrl } from "../api/baseURL";
-
+import { useNavigate } from "react-router";
 import Toastify from "toastify-js";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const backgroundImageUrl =
     "https://images.unsplash.com/photo-1714029198827-b71f439dd5dc?q=80&w=1920&auto=format&fit=crop";
   const [cuisines, setCuisines] = useState([]);
@@ -98,8 +99,54 @@ export default function HomePage() {
       });
       setCategories(data?.data);
     } catch (error) {
+      console.error("Error fetching categories:", error);
+      if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 403)
+      ) {
+        Toastify({
+          text: "Session expired or unauthorized. Please login.",
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "#FF0000",
+            color: "white",
+            border: "solid #FFFFFF",
+            borderRadius: "10px",
+          },
+        }).showToast();
+        localStorage.removeItem("access_token");
+        navigate("/users/login");
+      } else {
+        Toastify({
+          text:
+            error.response?.data?.message || "An unexpected error occurred.",
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "#f5b300",
+            color: "black",
+            border: "solid #FFFFFF",
+            borderRadius: "10px",
+          },
+        }).showToast();
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    if (!localStorage.access_token) {
       Toastify({
-        text: error.response.data.message,
+        text: "No access token found. Please login.",
         duration: 3000,
         newWindow: true,
         close: true,
@@ -107,19 +154,17 @@ export default function HomePage() {
         position: "right",
         stopOnFocus: true,
         style: {
-          background: "#f5b300",
-          color: "black",
+          background: "#FF0000",
+          color: "white",
           border: "solid #FFFFFF",
           borderRadius: "10px",
         },
       }).showToast();
-    } finally {
-      setLoading(false);
+      navigate("/users/login"); 
+      return; 
     }
-  }
-  useEffect(() => {
     fetchCategories();
-  }, [currentPage]);
+  }, [currentPage, navigate]);
 
   // console.log(cuisines);
   // console.log(categories);
