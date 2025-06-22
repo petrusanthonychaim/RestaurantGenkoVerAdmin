@@ -42,13 +42,11 @@ export default function EditPage() {
   async function handleSubmit(e, form) {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
-        `${baseUrl}/cuisine/show/${id}`, form,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.access_token}`,
-          },
-        });
+      const { data } = await axios.put(`${baseUrl}/cuisine/show/${id}`, form, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
       navigate("/");
       Toastify({
         text: `Succeed edit data ${data?.data.name}`,
@@ -90,7 +88,10 @@ export default function EditPage() {
 
   return (
     <>
-      <CuisineForm cuisine={cuisine} handleSubmit={handleSubmit} propName="Edit Cuisine"
+      <CuisineForm
+        cuisine={cuisine}
+        handleSubmit={handleSubmit}
+        propName="Edit Cuisine"
       />
     </>
   );

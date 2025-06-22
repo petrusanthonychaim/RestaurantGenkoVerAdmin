@@ -72,7 +72,7 @@ export default function TableImages({ cuisine, fetchCuisines }) {
 
       await fetchCuisines();
 
-      Toastify({ 
+      Toastify({
         text: "Image uploaded successfully!",
         duration: 3000,
         newWindow: true,
@@ -86,7 +86,7 @@ export default function TableImages({ cuisine, fetchCuisines }) {
           border: "solid #FFFFFF",
           borderRadius: "10px",
         },
-       }).showToast();
+      }).showToast();
     } catch (error) {
       Toastify({
         text: error.response?.data?.message || "Upload failed",

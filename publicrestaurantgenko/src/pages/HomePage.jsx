@@ -132,10 +132,9 @@ export default function HomePage() {
       return;
     }
 
-    // --- Update to server ---
+    // UPDATED TO SERVER
     try {
       setLoading(true);
-      // Using the renamed state variable
       const newCategory = { name: newCategoryName };
       await axios.post(`${baseUrl}/categories/addForm`, newCategory, {
         headers: {
@@ -169,7 +168,7 @@ export default function HomePage() {
 
   function handleSort(direction) {
     if (sortOrder === direction) {
-      setSortOrder(""); // Clear sort
+      setSortOrder("");
     } else {
       setSortOrder(direction);
     }
@@ -240,11 +239,8 @@ export default function HomePage() {
           </div>
 
           <div className="flex justify-center items-center flex-wrap gap-4 mb-8">
-
-            {/* Sort Buttons */}
             <button
               onClick={() => handleSort("createdAt")}
-              // Applying the main style, and the active style conditionally
               className={`${mainActionButtonStyles} ${
                 sortOrder === "createdAt" ? activeSortButtonStyles : ""
               }`}

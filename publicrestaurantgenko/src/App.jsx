@@ -6,13 +6,12 @@ import LoginPageAdmin from "./pages/LoginPageAdmin";
 import EditCuisine from "./pages/EditCuisine";
 import RegisterPage from "./pages/RegisterPage";
 
-
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/users/register" element={<RegisterPage />} />
+          <Route path="/users/login" element={<LoginPageAdmin />} />
           <Route element={<BaseLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/cuisine/addForm" element={<AddCuisine />} />
