@@ -2,7 +2,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import TableImages from "../components/TableImages";
 import loadingGif from "../assets/images/loading.svg";
-import { baseUrl } from "../../api/baseURL";
+import { baseUrl } from "../api/baseURL";
+
+import Toastify from "toastify-js";
 
 export default function HomePage() {
   const backgroundImageUrl =
@@ -10,9 +12,13 @@ export default function HomePage() {
   const [cuisines, setCuisines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
+  // CATEGORIES STATE
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  //PAGINATION STATE
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const pagination = handlePagination();
@@ -49,7 +55,21 @@ export default function HomePage() {
       // console.log(data?.page);
       // console.log(data?.totalPage);
     } catch (error) {
-      console.log(error);
+      Toastify({
+        text: error.response.data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
     } finally {
       setLoading(false);
     }
@@ -69,7 +89,21 @@ export default function HomePage() {
       });
       setCategories(data?.data);
     } catch (error) {
-      console.log(error);
+      Toastify({
+        text: error.response.data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
     } finally {
       setLoading(false);
     }
@@ -80,6 +114,49 @@ export default function HomePage() {
 
   // console.log(cuisines);
   // console.log(categories);
+
+  async function handleAddCategory(event) {
+    event.preventDefault();
+
+    if (!newCategoryName.trim()) {
+      alert("Please enter a category name.");
+      return;
+    }
+
+    // --- Update to server ---
+    try {
+      setLoading(true);
+      // Using the renamed state variable
+      const newCategory = { name: newCategoryName };
+      await axios.post(`${baseUrl}/categories/addForm`, newCategory, {
+        headers: {
+          Authorization: `Bearer ${localStorage.access_token}`,
+        },
+      });
+
+      setNewCategoryName("");
+
+      await fetchCategories();
+    } catch (error) {
+      Toastify({
+        text: error.response.data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
+    } finally {
+      setLoading(false);
+    }
+  }
 
   function handlePagination() {
     let arr = [];
@@ -167,11 +244,26 @@ export default function HomePage() {
                     {cat.name}
                   </button>
                 ))}
-                <button
-                  className={`${categoryButtonBase} bg-green-700 text-white hover:bg-green-600`}
-                >
-                  + Add Category
-                </button>
+                {/* new */}
+                <form onSubmit={handleAddCategory}>
+                  <input
+                    type="text"
+                    value={newCategoryName}
+                    onChange={(e) => setNewCategoryName(e.target.value)}
+                    // onKeyPress={handleKeyPress}
+                    placeholder="Category Name"
+                    className="px-4 py-2 text-sm rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    autoFocus
+                  />
+                  {/* new */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`${categoryButtonBase} bg-green-700 text-white hover:bg-green-600`}
+                  >
+                    {loading ? "Adding ..." : "+ Add Category"}
+                  </button>
+                </form>
               </div>
             </div>
           )}

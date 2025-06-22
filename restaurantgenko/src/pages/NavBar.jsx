@@ -30,7 +30,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              to="/"
+              to="/cuisine/addForm"
               className="transition duration-200 hover:text-yellow-300 hover:animate-pulse"
             >
               Add Cuisine
@@ -42,14 +42,6 @@ export default function Navbar() {
               className="transition duration-200 hover:text-yellow-300 hover:animate-pulse"
             >
               Register / Login
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/"
-              className="transition duration-200 hover:text-yellow-300 hover:animate-pulse"
-            >
-              Support
             </Link>
           </li>
           <li>
