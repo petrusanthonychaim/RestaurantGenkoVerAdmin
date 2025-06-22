@@ -1,0 +1,24 @@
+{
+"tailwindCSS.experimental.configFile": null,
+"javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
+"editor.quickSuggestions": {
+    "strings": "on"
+},
+"tailwindCSS.emmetCompletions": false,
+"tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+},
+"tailwindCSS.lint.cssConflict": "ignore",
+"tailwindCSS.classFunctions": [
+    "[]"
+],
+"editor.codeActions.triggerOnFocusChange": true,
+"tailwindCSS.experimental.classRegex": [
+
+],
+"editor.inlineSuggest.suppressSuggestions": true,
+"editor.inlineCompletionsAccessibilityVerbose": true,
+"emmet.useInlineCompletions": true,
+"editor.tabSize": 2,
+"editor.indentSize": "tabSize"
+}

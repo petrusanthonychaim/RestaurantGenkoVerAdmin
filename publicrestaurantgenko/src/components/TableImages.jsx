@@ -144,35 +144,6 @@ export default function TableImages({ cuisine, fetchCuisines }) {
               })}
             </p>
           </div>
-          {/*  */}
-          <div className="mt-4 flex space-x-3 justify-end">
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleImageUpload}
-              style={{ display: "none" }}
-              accept="image/png, image/jpeg"
-            />
-            <button
-              className="text-amber-400 hover:text-amber-600"
-              onClick={triggerFileSelect}
-              title="Upload Image"
-            >
-              <span className="material-symbols-outlined">upload_file</span>
-            </button>
-            <Link to={`/cuisine/show/${cuisine.id}`}>
-              <button className="text-amber-400 hover:text-amber-600">
-                <span className="material-symbols-outlined">edit</span>
-              </button>
-            </Link>
-            <button
-              className="text-amber-400 hover:text-amber-600"
-              onClick={handleDelete}
-            >
-              <span className="material-symbols-outlined">delete</span>
-            </button>
-          </div>
-          {/*  */}
         </div>
       </div>
     </>

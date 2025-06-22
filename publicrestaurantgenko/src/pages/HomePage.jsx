@@ -240,13 +240,6 @@ export default function HomePage() {
 
           <div className="flex justify-center items-center flex-wrap gap-4 mb-8">
             <button
-              onClick={() => setShowCategoryFilter(!showCategoryFilter)}
-              className={mainActionButtonStyles}
-            >
-              {showCategoryFilter ? "Hide Categories" : "Show Categories"}
-            </button>
-
-            <button
               onClick={() => handleSort("createdAt")}
               className={`${mainActionButtonStyles} ${
                 sortOrder === "createdAt" ? activeSortButtonStyles : ""
@@ -263,55 +256,6 @@ export default function HomePage() {
               Desc
             </button>
           </div>
-
-          {showCategoryFilter && (
-            <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-lg mb-8">
-              <div className="flex flex-wrap justify-center gap-3">
-                <button
-                  onClick={() => handleCategorySelect(null)}
-                  className={`${categoryButtonBase} ${
-                    selectedCategory === null
-                      ? activeCategoryStyles
-                      : defaultCategoryStyles
-                  }`}
-                >
-                  All Cuisines
-                </button>
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleCategorySelect(cat.id)}
-                    className={`${categoryButtonBase} ${
-                      selectedCategory === cat.id
-                        ? activeCategoryStyles
-                        : defaultCategoryStyles
-                    }`}
-                  >
-                    {cat.name}
-                  </button>
-                ))}
-                {/*  */}
-                <form onSubmit={handleAddCategory}>
-                  <input
-                    type="text"
-                    value={newCategoryName}
-                    onChange={(e) => setNewCategoryName(e.target.value)}
-                    placeholder="Category Name"
-                    className="px-4 py-2 text-sm rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    autoFocus
-                  />
-                  {/*  */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={`${categoryButtonBase} bg-green-700 text-white hover:bg-green-600`}
-                  >
-                    {loading ? "Adding ..." : "+ Add Category"}
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
 
           {loading ? (
             <>
