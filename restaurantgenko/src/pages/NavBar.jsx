@@ -44,14 +44,14 @@ export default function Navbar() {
               Register
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link
               to="/users/login"
               className="transition duration-200 hover:text-yellow-300 hover:animate-pulse"
             >
               Login
             </Link>
-          </li> */}
+          </li>
           <li>
             <a onClick={handleLogout} className="text-green-700">
               <span>Logout</span>
