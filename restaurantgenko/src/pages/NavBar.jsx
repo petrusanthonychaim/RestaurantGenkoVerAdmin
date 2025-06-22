@@ -38,12 +38,20 @@ export default function Navbar() {
           </li>
           <li>
             <Link
+              to="/users/register"
+              className="transition duration-200 hover:text-yellow-300 hover:animate-pulse"
+            >
+              Register
+            </Link>
+          </li>
+          {/* <li>
+            <Link
               to="/users/login"
               className="transition duration-200 hover:text-yellow-300 hover:animate-pulse"
             >
-              Register / Login
+              Login
             </Link>
-          </li>
+          </li> */}
           <li>
             <a onClick={handleLogout} className="text-green-700">
               <span>Logout</span>

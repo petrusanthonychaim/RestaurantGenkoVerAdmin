@@ -12,6 +12,7 @@ export default function HomePage() {
   const [cuisines, setCuisines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
 
   // CATEGORIES STATE
   const [categories, setCategories] = useState([]);
@@ -24,6 +25,10 @@ export default function HomePage() {
   const pagination = handlePagination();
 
   // STYLE
+  const mainActionButtonStyles =
+    "px-5 py-2 bg-yellow-500 text-white font-bold rounded-full shadow-lg hover:bg-yellow-600 transition-transform duration-200 hover:scale-105";
+  const activeSortButtonStyles =
+    "bg-amber-600 ring-2 ring-offset-2 ring-amber-600";
   const buttonBaseStyles =
     "flex items-center justify-center rounded-md font-semibold transition-colors duration-200";
   const prevNextButtonStyles = `${buttonBaseStyles} gap-x-2 px-4 py-2 bg-yellow-500 text-white hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed`;
@@ -45,6 +50,10 @@ export default function HomePage() {
       if (selectedCategory) {
         webUrl += `&filter=${selectedCategory}`;
       }
+      if (sortOrder) {
+        webUrl += `&sort=${sortOrder}`;
+      }
+
       const { data } = await axios.get(webUrl);
 
       setCuisines(data?.data);
@@ -76,7 +85,7 @@ export default function HomePage() {
   }
   useEffect(() => {
     fetchCuisines();
-  }, [currentPage, selectedCategory]);
+  }, [currentPage, selectedCategory, sortOrder]);
 
   //FETCH CATEGORIES
   async function fetchCategories() {
@@ -158,6 +167,15 @@ export default function HomePage() {
     }
   }
 
+  function handleSort(direction) {
+    if (sortOrder === direction) {
+      setSortOrder(""); // Clear sort
+    } else {
+      setSortOrder(direction);
+    }
+    setCurrentPage(1);
+  }
+
   function handlePagination() {
     let arr = [];
     for (let i = 1; i <= totalPage; i++) {
@@ -177,7 +195,9 @@ export default function HomePage() {
 
   function handleSearch(e) {
     e.preventDefault();
-    fetchProducts();
+    setSelectedCategory(null);
+    setCurrentPage(1);
+    fetchCuisines();
   }
 
   function handleCategorySelect(categoryId) {
@@ -199,25 +219,55 @@ export default function HomePage() {
           <div className="relative mb-12">
             <input
               type="text"
-              placeholder="Search for a dish..."
-              className="w-full pl-6 pr-40 py-4 rounded-full text-lg text-gray-800 bg-white shadow-xl focus:outline-none focus:ring-2 focus:ring-amber-400"
+              placeholder="Search all dishes..."
+              className="w-full h-10 pl-6 pr-40 py-4 rounded-full text-lg text-gray-800 bg-white shadow-xl focus:outline-none focus:ring-2 focus:ring-amber-400"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch(e);
+                }
+              }}
             />
             <div className="absolute inset-y-0 right-0 pr-5 flex items-center">
-              <i className="material-icons text-3xl text-gray-500 cursor-pointer">
+              <i
+                onClick={handleSearch}
+                className="material-icons text-3xl text-gray-500 cursor-pointer"
+              >
                 search
               </i>
             </div>
           </div>
 
-          {/* CATEGORY */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center items-center flex-wrap gap-4 mb-8">
             <button
               onClick={() => setShowCategoryFilter(!showCategoryFilter)}
-              className="px-6 py-2 bg-yellow-500 text-white font-bold rounded-full shadow-lg hover:bg-yellow-600 transition-transform duration-200 hover:scale-105"
+              className={mainActionButtonStyles}
             >
               {showCategoryFilter ? "Hide Categories" : "Show Categories"}
             </button>
+
+            {/* Sort Buttons */}
+            <button
+              onClick={() => handleSort("createdAt")}
+              // Applying the main style, and the active style conditionally
+              className={`${mainActionButtonStyles} ${
+                sortOrder === "createdAt" ? activeSortButtonStyles : ""
+              }`}
+            >
+              Asc
+            </button>
+            <button
+              onClick={() => handleSort("-createdAt")}
+              className={`${mainActionButtonStyles} ${
+                sortOrder === "-createdAt" ? activeSortButtonStyles : ""
+              }`}
+            >
+              Desc
+            </button>
           </div>
+
+          {/* CATEGORY */}
           {showCategoryFilter && (
             <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-lg mb-8">
               <div className="flex flex-wrap justify-center gap-3">
@@ -244,7 +294,7 @@ export default function HomePage() {
                     {cat.name}
                   </button>
                 ))}
-                {/* new */}
+                {/*  */}
                 <form onSubmit={handleAddCategory}>
                   <input
                     type="text"
@@ -255,7 +305,7 @@ export default function HomePage() {
                     className="px-4 py-2 text-sm rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                     autoFocus
                   />
-                  {/* new */}
+                  {/*  */}
                   <button
                     type="submit"
                     disabled={loading}
@@ -277,7 +327,11 @@ export default function HomePage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {cuisines?.map((cuisine) => (
-                <TableImages key={cuisine.id} cuisine={cuisine} />
+                <TableImages
+                  key={cuisine.id}
+                  cuisine={cuisine}
+                  fetchCuisines={fetchCuisines}
+                />
               ))}
             </div>
           )}

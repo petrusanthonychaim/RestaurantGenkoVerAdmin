@@ -42,11 +42,10 @@ export default function AddPage() {
         position: "right",
         stopOnFocus: true,
         style: {
-          background: "#F87171",
+          background: "#f5b300",
           color: "black",
-          border: "solid #000000",
-          borderRadius: "8px",
-          boxShadow: "2px 2px black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
         },
       }).showToast();
     }

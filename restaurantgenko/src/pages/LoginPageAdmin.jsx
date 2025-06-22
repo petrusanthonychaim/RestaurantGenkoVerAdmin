@@ -93,7 +93,6 @@ export default function LoginPageAdmin() {
                 <span className="text-gray-900">RESTAURANT GENKO </span>
                 <span className="text-amber-400">げんこ</span>
               </h1>
-              <p className="mt-2 text-lg text-gray-600">Admin Login</p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-6">
