@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../../api/baseURL";
+import { baseUrl } from "../api/baseURL";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import Button from "../components/Button";
+import Toastify from "toastify-js";
 
 export default function LoginPageAdmin() {
   const [email, setEmail] = useState("");
@@ -12,6 +13,21 @@ export default function LoginPageAdmin() {
 
   useEffect(() => {
     if (localStorage.access_token) {
+      Toastify({
+        text: "You already logged in",
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
       navigate("/");
     }
   }, [navigate]);
@@ -25,8 +41,37 @@ export default function LoginPageAdmin() {
       });
       localStorage.setItem("access_token", data?.access_token);
       navigate("/");
+      Toastify({
+        text: "Succeed Login",
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
     } catch (error) {
-      console.log(error);
+      Toastify({
+        text: error.response.data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
     }
   }
 
@@ -93,7 +138,7 @@ export default function LoginPageAdmin() {
               </div>
 
               <div className="flex items-center gap-4 pt-2">
-                <Button className="bg-yellow-500" nameProp={"Login"} />
+                <Button nameProp="Login" />
               </div>
             </form>
           </div>

@@ -1,6 +1,61 @@
+import { useNavigate, useParams } from "react-router";
+import axios from "axios";
+import { baseUrl } from "../api/baseURL.js";
+import Toastify from "toastify-js";
+import { useEffect, useState } from "react";
+import loadingGif from "../assets/images/loading.svg";
 import { Link } from "react-router";
 
-const TableImages = ({ cuisine }) => {
+export default function TableImages({ cuisine }) {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleDelete() {
+    try {
+      const { data } = await axios.delete(
+        `${baseUrl}/cuisine/delete/${cuisine.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.access_token}`,
+          },
+        }
+      );
+
+      fetchProduct();
+      Toastify({
+        text: data.message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
+    } catch (error) {
+      Toastify({
+        text: error.response.data.error,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "#f5b300",
+          color: "black",
+          border: "solid #FFFFFF",
+          borderRadius: "10px",
+        },
+      }).showToast();
+    }
+  }
+
   return (
     <>
       <div className="bg-white rounded-lg shadow-xl overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out">
@@ -28,10 +83,21 @@ const TableImages = ({ cuisine }) => {
               })}
             </p>
           </div>
+          {/*  */}
+          <div className="mt-4 flex space-x-3 justify-end">
+            <Link to={`/cuisine/show/${cuisine.id}`}>
+              <button className="text-amber-400 hover:text-amber-600">
+                <span className="material-symbols-outlined">edit</span>
+              </button>
+            </Link>
+              <button className="text-amber-400 hover:text-amber-600"
+              onClick={handleDelete}>
+                <span className="material-symbols-outlined">delete</span>
+              </button>
+          </div>
+          {/*  */}
         </div>
       </div>
     </>
   );
-};
-
-export default TableImages;
+}
