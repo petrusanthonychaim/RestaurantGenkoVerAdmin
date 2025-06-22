@@ -99,15 +99,13 @@ export default function HomePage() {
       });
       setCategories(data?.data);
     } catch (error) {
-      console.error("Error fetching categories:", error); // LINE ADDED: Log the full error for debugging
-      // IMPORTANT: Add conditional navigation here based on error status
+      console.error("Error fetching categories:", error);
       if (
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
-        // LINE MODIFIED: Added conditional check
         Toastify({
-          text: "Session expired or unauthorized. Please login.", // LINE MODIFIED: Specific message
+          text: "Session expired or unauthorized. Please login.",
           duration: 3000,
           newWindow: true,
           close: true,
@@ -115,19 +113,15 @@ export default function HomePage() {
           position: "right",
           stopOnFocus: true,
           style: {
-            background: "#FF0000", // LINE MODIFIED: Red background for critical error
+            background: "#FF0000",
             color: "white",
             border: "solid #FFFFFF",
             borderRadius: "10px",
           },
         }).showToast();
-        // LINE ADDED: Clear token (optional, but good practice if it's invalid)
         localStorage.removeItem("access_token");
-        // LINE ADDED: Navigate to login page
-        navigate("/users/login"); // Redirect to your login route
+        navigate("/users/login");
       } else {
-        // LINE ADDED: Else block for other errors
-        // LINE MODIFIED: Show original error message for other errors
         Toastify({
           text:
             error.response?.data?.message || "An unexpected error occurred.",
@@ -150,7 +144,6 @@ export default function HomePage() {
     }
   }
   useEffect(() => {
-    // LINE ADDED: Initial token check on component mount
     if (!localStorage.access_token) {
       Toastify({
         text: "No access token found. Please login.",
@@ -167,8 +160,8 @@ export default function HomePage() {
           borderRadius: "10px",
         },
       }).showToast();
-      navigate("/users/login"); // LINE ADDED: Redirect if no token
-      return; // LINE ADDED: Stop execution if no token
+      navigate("/users/login"); 
+      return; 
     }
     fetchCategories();
   }, [currentPage, navigate]);
