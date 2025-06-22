@@ -19,10 +19,7 @@ export default function CuisineForm({ cuisine, handleSubmit, propName }) {
 
   function handleInput(fieldName, e) {
     let value = e.target.value;
-    if (
-      fieldName === "price" ||
-      fieldName === "categoryId"
-    ) {
+    if (fieldName === "price" || fieldName === "categoryId") {
       value = +e.target.value;
     }
 
@@ -96,7 +93,8 @@ export default function CuisineForm({ cuisine, handleSubmit, propName }) {
     <>
       <form
         className="p-10 mt-5 border-2 border-white rounded-lg bg-amber-400"
-        onSubmit={(e) => handleSubmit(e, form)}>
+        onSubmit={(e) => handleSubmit(e, form)}
+      >
         <h1 className="text-2xl font-bold text-center mb-4">{propName}</h1>
         <div className="grid grid-cols-2 gap-4">
           <div>

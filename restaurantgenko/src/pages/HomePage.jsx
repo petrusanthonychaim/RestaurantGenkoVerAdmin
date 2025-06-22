@@ -132,10 +132,9 @@ export default function HomePage() {
       return;
     }
 
-    // --- Update to server ---
+    // UPDATED TO SERVER
     try {
       setLoading(true);
-      // Using the renamed state variable
       const newCategory = { name: newCategoryName };
       await axios.post(`${baseUrl}/categories/addForm`, newCategory, {
         headers: {
@@ -169,7 +168,7 @@ export default function HomePage() {
 
   function handleSort(direction) {
     if (sortOrder === direction) {
-      setSortOrder(""); // Clear sort
+      setSortOrder("");
     } else {
       setSortOrder(direction);
     }
@@ -247,10 +246,8 @@ export default function HomePage() {
               {showCategoryFilter ? "Hide Categories" : "Show Categories"}
             </button>
 
-            {/* Sort Buttons */}
             <button
               onClick={() => handleSort("createdAt")}
-              // Applying the main style, and the active style conditionally
               className={`${mainActionButtonStyles} ${
                 sortOrder === "createdAt" ? activeSortButtonStyles : ""
               }`}
@@ -267,7 +264,6 @@ export default function HomePage() {
             </button>
           </div>
 
-          {/* CATEGORY */}
           {showCategoryFilter && (
             <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-lg mb-8">
               <div className="flex flex-wrap justify-center gap-3">
@@ -300,7 +296,6 @@ export default function HomePage() {
                     type="text"
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
-                    // onKeyPress={handleKeyPress}
                     placeholder="Category Name"
                     className="px-4 py-2 text-sm rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
                     autoFocus
