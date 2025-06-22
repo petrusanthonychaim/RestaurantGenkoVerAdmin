@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import TableImages from "../components/TableImages";
 import loadingGif from "../assets/images/loading.svg";
 import { baseUrl } from "../api/baseURL";
-
+import { useNavigate } from "react-router";
 import Toastify from "toastify-js";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const backgroundImageUrl =
     "https://images.unsplash.com/photo-1714029198827-b71f439dd5dc?q=80&w=1920&auto=format&fit=crop";
   const [cuisines, setCuisines] = useState([]);
@@ -98,8 +99,61 @@ export default function HomePage() {
       });
       setCategories(data?.data);
     } catch (error) {
+      console.error("Error fetching categories:", error); // LINE ADDED: Log the full error for debugging
+      // IMPORTANT: Add conditional navigation here based on error status
+      if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 403)
+      ) {
+        // LINE MODIFIED: Added conditional check
+        Toastify({
+          text: "Session expired or unauthorized. Please login.", // LINE MODIFIED: Specific message
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "#FF0000", // LINE MODIFIED: Red background for critical error
+            color: "white",
+            border: "solid #FFFFFF",
+            borderRadius: "10px",
+          },
+        }).showToast();
+        // LINE ADDED: Clear token (optional, but good practice if it's invalid)
+        localStorage.removeItem("access_token");
+        // LINE ADDED: Navigate to login page
+        navigate("/users/login"); // Redirect to your login route
+      } else {
+        // LINE ADDED: Else block for other errors
+        // LINE MODIFIED: Show original error message for other errors
+        Toastify({
+          text:
+            error.response?.data?.message || "An unexpected error occurred.",
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "bottom",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: "#f5b300",
+            color: "black",
+            border: "solid #FFFFFF",
+            borderRadius: "10px",
+          },
+        }).showToast();
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+  useEffect(() => {
+    // LINE ADDED: Initial token check on component mount
+    if (!localStorage.access_token) {
       Toastify({
-        text: error.response.data.message,
+        text: "No access token found. Please login.",
         duration: 3000,
         newWindow: true,
         close: true,
@@ -107,19 +161,17 @@ export default function HomePage() {
         position: "right",
         stopOnFocus: true,
         style: {
-          background: "#f5b300",
-          color: "black",
+          background: "#FF0000",
+          color: "white",
           border: "solid #FFFFFF",
           borderRadius: "10px",
         },
       }).showToast();
-    } finally {
-      setLoading(false);
+      navigate("/users/login"); // LINE ADDED: Redirect if no token
+      return; // LINE ADDED: Stop execution if no token
     }
-  }
-  useEffect(() => {
     fetchCategories();
-  }, [currentPage]);
+  }, [currentPage, navigate]);
 
   // console.log(cuisines);
   // console.log(categories);
